@@ -1,13 +1,15 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import prettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
   { ignores: ['dist'] },
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -19,6 +21,7 @@ export default [
     },
     settings: { react: { version: '18.3' } },
     plugins: {
+      prettier, // prettier 플러그인 추가
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
@@ -28,6 +31,10 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+      ...prettierConfig.rules, // Prettier와 충돌 방지 설정 추가
+      'prettier/prettier': 'error', // Prettier 규칙 적용으로 스타일 위반 시 경고
+
+      // 기존 React 관련 룰 설정
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',
@@ -35,4 +42,4 @@ export default [
       ],
     },
   },
-]
+];
