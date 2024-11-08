@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Outlet } from 'react-router';
 
 const Main = () => {
   return (
-    <div className='grow py-[70px]'>
-      Main
+    <div className="grow py-[70px]">
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
