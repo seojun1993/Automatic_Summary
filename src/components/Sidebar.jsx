@@ -10,6 +10,7 @@ const Sidebar = () => {
 
   const handleClick = () => {
     const id = uuidv4();
+
     const newNote = {
       id,
       title: '새로운 노트',
@@ -17,11 +18,13 @@ const Sidebar = () => {
       time: Date.now(),
       summary: '',
     };
+
     dispatch(addNote(newNote));
     navigate(`/notes/${id}`);
   };
 
   const notes = useSelector((state) => state.notes);
+
   return (
     <div className="w-[240px] p-4">
       <h1 className="text-2xl font-bold mb-4">FastCampus Note</h1>
@@ -43,8 +46,8 @@ const Sidebar = () => {
           홈
         </NavLink>
         <ul className="mt-4">
-          {notes.map((note) => {
-            <li>
+          {notes.map((note) => (
+            <li key={note.id} className="mb-2">
               <NavLink
                 to={`/notes/${note.id}`}
                 className={(isActive) =>
@@ -55,8 +58,8 @@ const Sidebar = () => {
               >
                 {note.title}
               </NavLink>
-            </li>;
-          })}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

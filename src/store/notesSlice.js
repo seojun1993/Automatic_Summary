@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const notesSlice = createSlice({
   name: 'notes',
   initialState: [],
-  reducer: {
+  reducers: {
     addNote: (state, action) => {
       state.push(action.payload);
     },
     deleteNote: (state, action) => {
-      state.filter((note) => note.id !== action.payload);
+      return state.filter((note) => note.id !== action.payload);
     },
     updateNote: (state, action) => {
       const { id, title, content, summary } = action.payload;
